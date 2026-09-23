@@ -1,0 +1,37 @@
+# Runtime versions taken from the final experiment environment.
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.7.1+cu118
+torchvision==0.22.1+cu118
+torchaudio==2.7.1+cu118
+GitPython==3.1.46
+accelerate==1.13.0
+einops
+gdown==6.2.0
+gymnasium==0.29.1
+h5py
+huggingface-hub==0.36.2
+imageio==2.37.3
+imageio-ffmpeg==0.6.0
+matplotlib==3.10.8
+numpy==1.24.4
+opencv-python==4.11.0.86
+packaging==25.0
+peft==0.14.0
+pillow==12.1.1
+pytorch-kinematics==0.7.6
+pyyaml==6.0.3
+rich==14.3.3
+rtree==1.4.1
+ruckig==0.12.2
+safetensors==0.7.0
+sapien==2.2.2
+scipy==1.15.3
+sentencepiece
+tabulate==0.10.0
+tensorboard==2.15.2
+tensorflow-cpu==2.15.1
+tokenizers==0.21.4
+tqdm==4.67.3
+transformers==4.47.1
+transforms3d==0.4.2
+trimesh==4.11.5

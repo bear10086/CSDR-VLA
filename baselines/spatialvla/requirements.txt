@@ -1,0 +1,37 @@
+# Runtime versions taken from the final experiment environment.
+--extra-index-url https://download.pytorch.org/whl/cu121
+torch==2.2.0+cu121
+torchvision==0.17.0+cu121
+torchaudio==2.2.0+cu121
+accelerate==1.0.1
+datasets==3.0.2
+einops==0.8.2
+einops-exts==0.0.4
+h5py
+huggingface-hub==0.36.2
+imageio==2.37.2
+imageio-ffmpeg==0.6.0
+json-numpy==2.1.1
+matplotlib==3.10.8
+numpy==1.26.4
+opencv-python==4.8.1.78
+packaging==25.0
+peft==0.14.0
+pillow==12.1.1
+pyyaml==6.0.3
+rich==14.3.3
+safetensors==0.7.0
+scipy==1.15.3
+sentencepiece==0.1.99
+tensorboard==2.15.2
+tensorflow==2.15.0
+tensorflow-addons==0.23.0
+tensorflow-datasets==4.9.3
+tensorflow-graphics==2021.12.3
+tensorflow-metadata==1.17.3
+timm==0.9.10
+tokenizers==0.21.4
+tqdm==4.67.3
+transformers==4.47.0
+transforms3d
+wandb==0.25.0

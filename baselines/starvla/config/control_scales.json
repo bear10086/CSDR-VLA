@@ -1,0 +1,142 @@
+{
+  "scales": {
+    "action_translation": 0.4692472815513611,
+    "action_rotation": 0.4248346984386444,
+    "action_gripper": 0.6614378094673157
+  },
+  "by_length": {
+    "16": {
+      "action_translation": 0.4692472815513611,
+      "action_rotation": 0.4248346984386444,
+      "action_gripper": 0.6614378094673157
+    },
+    "15": {
+      "action_translation": 0.4662124812602997,
+      "action_rotation": 0.4216899275779724,
+      "action_gripper": 0.6831300258636475
+    },
+    "14": {
+      "action_translation": 0.46557873487472534,
+      "action_rotation": 0.42173218727111816,
+      "action_gripper": 0.7071067690849304
+    },
+    "13": {
+      "action_translation": 0.46376198530197144,
+      "action_rotation": 0.4166378974914551,
+      "action_gripper": 0.6793662309646606
+    },
+    "12": {
+      "action_translation": 0.46206361055374146,
+      "action_rotation": 0.4193035364151001,
+      "action_gripper": 0.7071067690849304
+    },
+    "11": {
+      "action_translation": 0.45667481422424316,
+      "action_rotation": 0.4163815379142761,
+      "action_gripper": 0.6741998791694641
+    },
+    "10": {
+      "action_translation": 0.4560508131980896,
+      "action_rotation": 0.4130522608757019,
+      "action_gripper": 0.7071067690849304
+    },
+    "9": {
+      "action_translation": 0.45100510120391846,
+      "action_rotation": 0.40902769565582275,
+      "action_gripper": 0.6666666865348816
+    },
+    "8": {
+      "action_translation": 0.44448909163475037,
+      "action_rotation": 0.40576499700546265,
+      "action_gripper": 0.7071067690849304
+    },
+    "7": {
+      "action_translation": 0.4475567042827606,
+      "action_rotation": 0.40603870153427124,
+      "action_gripper": 0.7559289336204529
+    },
+    "6": {
+      "action_translation": 0.44080275297164917,
+      "action_rotation": 0.4007912874221802,
+      "action_gripper": 0.7071067690849304
+    },
+    "5": {
+      "action_translation": 0.43854421377182007,
+      "action_rotation": 0.3999400734901428,
+      "action_gripper": 0.6324555277824402
+    },
+    "4": {
+      "action_translation": 0.4344211518764496,
+      "action_rotation": 0.3957887887954712,
+      "action_gripper": 0.7071067690849304
+    }
+  },
+  "calibration": {
+    "16": {
+      "samples": 20000,
+      "pairs": 199990,
+      "seed": 42
+    },
+    "15": {
+      "samples": 20000,
+      "pairs": 199988,
+      "seed": 57
+    },
+    "14": {
+      "samples": 20000,
+      "pairs": 199994,
+      "seed": 56
+    },
+    "13": {
+      "samples": 20000,
+      "pairs": 199992,
+      "seed": 55
+    },
+    "12": {
+      "samples": 20000,
+      "pairs": 199992,
+      "seed": 54
+    },
+    "11": {
+      "samples": 20000,
+      "pairs": 199994,
+      "seed": 53
+    },
+    "10": {
+      "samples": 20000,
+      "pairs": 199992,
+      "seed": 52
+    },
+    "9": {
+      "samples": 20000,
+      "pairs": 199989,
+      "seed": 51
+    },
+    "8": {
+      "samples": 20000,
+      "pairs": 199991,
+      "seed": 50
+    },
+    "7": {
+      "samples": 20000,
+      "pairs": 199984,
+      "seed": 49
+    },
+    "6": {
+      "samples": 20000,
+      "pairs": 199990,
+      "seed": 48
+    },
+    "5": {
+      "samples": 20000,
+      "pairs": 199989,
+      "seed": 47
+    },
+    "4": {
+      "samples": 20000,
+      "pairs": 199994,
+      "seed": 46
+    }
+  },
+  "normalization": "checkpoint-normalized action RMS; fixed training-only medians"
+}

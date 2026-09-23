@@ -1,0 +1,13 @@
+/envs/
+/weights/
+/datasets/
+/runtime/
+/third_party/
+__pycache__/
+*.pyc
+wandb/
+.cache/
+.env
+config/paths.local.json
+common/simpler/ManiSkill2_real2sim/data/
+common/simpler/ManiSkill2_real2sim/mani_skill2_real2sim/assets/

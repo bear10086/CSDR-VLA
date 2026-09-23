@@ -1,0 +1,20 @@
+{
+  "work_dir": "runtime",
+  "libero_rlds": "datasets/modified_libero_rlds",
+  "bridge_rlds_root": "datasets/bridge",
+  "bridge_lerobot": "datasets/bridge_orig_1.0.0_lerobot",
+  "openvla_oft_weights": "weights/openvla_oft",
+  "spatialvla_weights": "weights/spatialvla",
+  "starvla_weights": "weights/starvla",
+  "starvla_backbone": "weights/Qwen2.5-VL-3B-Instruct-Action",
+  "turbovla_weights": "weights/turbovla/checkpoints/libero/turbovla_libero.pth",
+  "dinov3": "weights/dinov3",
+  "bert": "weights/bert",
+  "libero_repo": "third_party/LIBERO",
+  "python_openvla_oft": "envs/openvla_oft/bin/python",
+  "python_spatialvla": "envs/spatialvla/bin/python",
+  "python_spatialvla_eval": "envs/spatialvla_eval/bin/python",
+  "python_starvla": "envs/starvla/bin/python",
+  "python_starvla_eval": "envs/starvla_eval/bin/python",
+  "python_turbovla": "envs/turbovla/bin/python"
+}

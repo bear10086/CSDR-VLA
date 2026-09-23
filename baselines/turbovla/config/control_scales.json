@@ -1,0 +1,112 @@
+{
+  "scales": {
+    "action_translation": 0.5590590238571167,
+    "action_rotation": 0.21063748002052307,
+    "action_gripper": 1.1013163328170776
+  },
+  "by_length": {
+    "4": {
+      "action_translation": 0.5392833948135376,
+      "action_rotation": 0.20177948474884033,
+      "action_gripper": 1.030282735824585
+    },
+    "5": {
+      "action_translation": 0.5462480187416077,
+      "action_rotation": 0.20345185697078705,
+      "action_gripper": 1.0385000705718994
+    },
+    "6": {
+      "action_translation": 0.5486582517623901,
+      "action_rotation": 0.20615538954734802,
+      "action_gripper": 1.0473341941833496
+    },
+    "7": {
+      "action_translation": 0.54682457447052,
+      "action_rotation": 0.2050638198852539,
+      "action_gripper": 1.063881278038025
+    },
+    "8": {
+      "action_translation": 0.5494638681411743,
+      "action_rotation": 0.20351901650428772,
+      "action_gripper": 1.0734323263168335
+    },
+    "9": {
+      "action_translation": 0.5526779890060425,
+      "action_rotation": 0.2067544013261795,
+      "action_gripper": 1.0730135440826416
+    },
+    "10": {
+      "action_translation": 0.5555397272109985,
+      "action_rotation": 0.20555438101291656,
+      "action_gripper": 1.083528757095337
+    },
+    "11": {
+      "action_translation": 0.5571190714836121,
+      "action_rotation": 0.2060861736536026,
+      "action_gripper": 1.094120979309082
+    },
+    "12": {
+      "action_translation": 0.5590590238571167,
+      "action_rotation": 0.21063748002052307,
+      "action_gripper": 1.1013163328170776
+    }
+  },
+  "sampling": {
+    "4": {
+      "samples": 20000,
+      "pairs": 199993,
+      "seed": 11,
+      "padded_samples": 0
+    },
+    "5": {
+      "samples": 20000,
+      "pairs": 199983,
+      "seed": 12,
+      "padded_samples": 0
+    },
+    "6": {
+      "samples": 20000,
+      "pairs": 199990,
+      "seed": 13,
+      "padded_samples": 0
+    },
+    "7": {
+      "samples": 20000,
+      "pairs": 199993,
+      "seed": 14,
+      "padded_samples": 0
+    },
+    "8": {
+      "samples": 20000,
+      "pairs": 199987,
+      "seed": 15,
+      "padded_samples": 0
+    },
+    "9": {
+      "samples": 20000,
+      "pairs": 199993,
+      "seed": 16,
+      "padded_samples": 0
+    },
+    "10": {
+      "samples": 20000,
+      "pairs": 199993,
+      "seed": 17,
+      "padded_samples": 0
+    },
+    "11": {
+      "samples": 20000,
+      "pairs": 199985,
+      "seed": 18,
+      "padded_samples": 0
+    },
+    "12": {
+      "samples": 20000,
+      "pairs": 199986,
+      "seed": 19,
+      "padded_samples": 0
+    }
+  },
+  "estimator": "mean RMS",
+  "normalization": "exact native mixed_suite normalizer including gripper"
+}
