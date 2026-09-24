@@ -65,7 +65,7 @@ def prepare_rlds(model, dry):
     execute(command,model,dry)
     if not libero:
         execute([python(model),scripts/'cluster_prompt_catalog.py','--catalog',out/'prompt_catalog.json','--output-dir',out,'--cosine-threshold','0.94'],model,dry)
-    for seed in (7,8,9):
+    for seed in ((7,8,9) if libero else (7,)):
         command = [python(model),scripts/'build_batch_plan.py','--manifest',out/'trajectories.jsonl','--output',out/f'plans/epoch_seed{seed}.npz','--world-size','10','--per-device-batch-size',str(4 if libero else 8),'--cohort-count','5','--seed',str(seed)]
         if not libero: command += ['--canonical-map',out/'canonical_prompt_map.json']
         execute(command,model,dry)
@@ -103,16 +103,20 @@ def train(model,dry,resume=None):
         execute(prefix+[code/'finetune.py']+pairs(opts),model,dry,cwd=vendor_dir(model))
     elif model == 'spatialvla':
         opts=dict(model_name_or_path=path('spatialvla_weights'),data_root_dir=path('bridge_rlds_root'),data_mix='bridge_oxe_csdr',
-            planned_cohort_data_dir=path('work_dir')/'plans/bridge',planned_epoch_count=3,planned_episode_cache_size=16,
+            planned_cohort_data_dir=path('work_dir')/'plans/bridge',planned_epoch_count=1,planned_episode_cache_size=16,
             planned_prefetch_size=64,planned_decode_workers=4,output_dir=root/'checkpoints',do_train=True,csdr=True,
             csdr_order_to_task_ratio=.005,csdr_warmup_steps=300,csdr_action_translation_scale=.502,
             csdr_action_rotation_scale=.517,csdr_action_gripper_scale=.676,action_forward_steps=3,obs_backward_steps=0,
             use_raw_dataloader=True,dataloader_num_workers=0,per_device_train_batch_size=8,gradient_accumulation_steps=4,
-            max_steps=7626,learning_rate=5e-5,lr_scheduler_type='constant',warmup_steps=0,optim='adamw_torch_fused',
+            max_steps=2542,learning_rate=5e-5,lr_scheduler_type='constant',warmup_steps=0,optim='adamw_torch_fused',
             weight_decay=0.,lora=32,lora_alpha=32,lora_target='linear',grad_checkpoint=False,flash_attn=True,bf16=True,tf32=True,
             logging_steps=10,save_strategy='steps',save_steps=2542,save_total_limit=3,save_safetensors=True,
             remove_unused_columns=False,ddp_find_unused_parameters=True,report_to='tensorboard',run_name='SpatialVLA-CSDR')
-        if resume: opts['resume_from_checkpoint']=resume
+        if resume:
+            state=json.loads((resume/'trainer_state.json').read_text())
+            if int(state['global_step']) >= opts['max_steps']:
+                raise ValueError('SpatialVLA has reached the 2542-update budget; use evaluate instead of resume.')
+            opts['resume_from_checkpoint']=resume
         env=environment(model);env['LAUNCHER']='pytorch'
         execute(prefix+[vendor_dir(model)/'train/spatialvla_finetune.py']+pairs(opts),model,dry,env,cwd=vendor_dir(model))
     else:
@@ -124,7 +128,9 @@ def train(model,dry,resume=None):
 def checkpoints(model):
     root=run_dir(model)
     if model=='openvla_oft': return sorted((root/'checkpoints').glob('csdr--*_chkpt'))
-    if model=='spatialvla': return sorted((root/'checkpoints').glob('checkpoint-*'),key=lambda x:int(x.name.split('-')[-1]))
+    if model=='spatialvla':
+        checkpoint=root/'checkpoints/checkpoint-2542'
+        return [checkpoint] if checkpoint.is_dir() else []
     return [Path(json.loads(p.read_text())['checkpoint']) for p in sorted((root/'train').glob('step_*/complete.json'))]
 
 def evaluate(model,ckpt,dry):
@@ -153,7 +159,9 @@ def main():
     elif args.action in ('train','pipeline'):
         train(args.model,args.dry_run,args.resume)
         if args.action=='pipeline':
-            if args.dry_run: print('After successful training: evaluate each completed checkpoint.')
+            if args.dry_run:
+                print('After successful training: evaluate checkpoint-2542 only.' if args.model=='spatialvla'
+                      else 'After successful training: evaluate each completed checkpoint.')
             else:
                 found=checkpoints(args.model)
                 if not found:raise RuntimeError('No completed checkpoint found')

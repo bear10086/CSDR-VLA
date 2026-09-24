@@ -74,7 +74,7 @@ torchrun --standalone --nproc_per_node=10 \
   --data_root_dir datasets/bridge \
   --data_mix bridge_oxe_csdr \
   --planned_cohort_data_dir runtime/plans/bridge \
-  --planned_epoch_count 3 \
+  --planned_epoch_count 1 \
   --planned_episode_cache_size 16 \
   --planned_prefetch_size 64 \
   --planned_decode_workers 4 \
@@ -97,8 +97,8 @@ torchrun --standalone --nproc_per_node=10 \
 ```
 
 The effective batch size is 320, and the action window contains four steps.
-The three indexed plans match the recorded setup, but `--max_steps 2542`
-stops training after the first planned epoch. Checkpoints are saved every
+One indexed plan is used, and `--max_steps 2542` stops training after
+one planned epoch. Checkpoints are saved every
 1,000 updates and at the final update 2,542. The RS-CL-inspired auxiliary
 budget uses a 300-step warm-up, a 0.5% task-loss ratio cap, and cosine decay.
 
@@ -229,7 +229,7 @@ All relative paths are resolved from the project root. `work_dir` specifies wher
 |---|---:|---:|---:|---:|---:|---|
 | OpenVLA-OFT | 4 | 10 | 3 | 120 | 3 epochs, 6,543 steps | Every 2,181 steps |
 | TurboVLA | 4 | 10 | 3 | 120 | 3 epochs, 6,837 steps | Every 2,279 steps |
-| SpatialVLA | 8 | 10 | 4 | 320 | 3 epochs, 7,626 steps | Every 2,542 steps |
+| SpatialVLA | 8 | 10 | 4 | 320 | 1 epoch, 2,542 steps | At step 2,542 |
 | StarVLA | 2 | 10 | 8 | 160 | 1 epoch, 11,832 steps | 2,958 / 5,916 / 8,874 / 11,832 |
 
 A step denotes an optimizer update; an epoch denotes one complete pass over the corresponding predefined real training windows. The final batch uses validity masks, so its actual sample count may be smaller than the usual effective batch size. The default plans target 10 GPUs; changing only the GPU count in `torchrun` is not sufficient.
@@ -273,7 +273,7 @@ python csdr.py pipeline spatialvla
 python csdr.py pipeline starvla
 ```
 
-`pipeline` runs training first, then evaluates each checkpoint saved during that run in sequence using multiple GPUs after training completes successfully. For training only, replace `pipeline` with `train`. W&B is disabled by default; metrics and outputs are saved under `work_dir`.
+`pipeline` runs training first, then evaluates checkpoints using multiple GPUs after training completes successfully. For SpatialVLA, the training budget is fixed at one epoch (2,542 updates), and the pipeline evaluates only `checkpoint-2542`, without selecting a checkpoint by evaluation success rate. Existing checkpoints from later updates are not included in automatic evaluation. The other baselines evaluate each saved checkpoint in sequence. For training only, replace `pipeline` with `train`. W&B is disabled by default; metrics and outputs are saved under `work_dir`.
 
 To keep the process running after disconnecting SSH, use `tmux`:
 
@@ -288,11 +288,11 @@ To resume interrupted training, provide a complete checkpoint directory and reta
 ```bash
 python csdr.py pipeline starvla --resume runtime/starvla/train/step_002958
 python csdr.py pipeline turbovla --resume runtime/turbovla/train/step_002279
-python csdr.py pipeline spatialvla --resume runtime/spatialvla/checkpoints/checkpoint-2542
+python csdr.py pipeline spatialvla --resume /path/to/interrupted-checkpoint
 python csdr.py pipeline openvla_oft --resume runtime/openvla_oft/checkpoints/csdr--302181_chkpt
 ```
 
-Resuming requires the optimizer, scheduler, and corresponding random-state files. OFT checkpoint numbers include the initial 300,000-step offset; the other directory names record the number of additional updates.
+Resuming requires the optimizer, scheduler, and corresponding random-state files. For SpatialVLA, the interrupted checkpoint must be before update 2,542; the final `checkpoint-2542` has completed the training budget and should be evaluated rather than resumed. OFT checkpoint numbers include the initial 300,000-step offset; the other directory names record the number of additional updates.
 
 ## 5. Evaluation and Inference
 
