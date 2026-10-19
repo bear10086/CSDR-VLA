@@ -219,7 +219,7 @@ cp config/paths.json config/paths.local.json
 export CSDR_PATHS="$PWD/config/paths.local.json"
 ```
 
-All relative paths are resolved from the project root. `work_dir` specifies where preprocessing caches, checkpoints, and evaluation results are stored, and should point to a disk with sufficient space. The code contains no absolute paths from the authors' machines. Do not upload private configuration files or generated outputs to an anonymous repository.
+All relative paths are resolved from the project root. `work_dir` specifies where preprocessing caches, checkpoints, and evaluation results are stored, and should point to a disk with sufficient space. The code contains no absolute paths from the authors' machines.
 
 ## 4. Data Preparation and Training
 
@@ -320,7 +320,7 @@ Bridge evaluation uses seeds 7, 8, 9, and 10, with a simulation frequency of 500
 
 ### 5.2 Single-Observation Action Inference
 
-The following entry points call the original models' action prediction interfaces and output JSON. They **do not connect to or control a physical robot**:
+The following entry points call the original models' action prediction interfaces and output JSON. 
 
 ```bash
 # Single-camera Bridge models
